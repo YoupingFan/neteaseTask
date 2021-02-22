@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fan.demo.dao.RecordDao">
+    <select id="selectAll" resultType="BuyRecord">
+        select goods_id, buy_time, buy_price, buy_num, image, title  from record, goods
+        where record.goods_id = goods.id
+    </select>
+</mapper>
