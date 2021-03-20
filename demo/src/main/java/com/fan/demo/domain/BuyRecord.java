@@ -5,8 +5,6 @@ public class BuyRecord {
     private String buy_price;
     private String buy_time;
     private int buy_num;
-    private String title;
-    private String image;
 
     public int getGoods_id() {
         return goods_id;
@@ -40,19 +38,4 @@ public class BuyRecord {
         this.buy_num = buy_num;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 }

@@ -34,4 +34,34 @@ public class GoodsServiceImpl implements GoodsService{
         msg.put("result", JSONObject.toJSON(goods));
         return msg;
     }
+
+    @Override
+    public JSONObject addGoodsInfo(Goods goods) {
+        JSONObject msg = new JSONObject();
+        goodsDao.insert(goods);
+        msg.put("code", 200);
+        msg.put("message", "success");
+        msg.put("result", null);
+        return msg;
+    }
+
+    @Override
+    public JSONObject deleteGoods(int id) {
+        JSONObject msg = new JSONObject();
+        goodsDao.delete(id);
+        msg.put("code", 200);
+        msg.put("message", "success");
+        msg.put("result", null);
+        return msg;
+    }
+
+    @Override
+    public JSONObject updateGoods(Goods goods) {
+        JSONObject msg = new JSONObject();
+        goodsDao.updateInfo(goods);
+        msg.put("code", 200);
+        msg.put("message", "success");
+        msg.put("result", null);
+        return msg;
+    }
 }

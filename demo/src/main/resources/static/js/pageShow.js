@@ -5,35 +5,98 @@ var goodsId = location.search.split('=')[1];
 
 var $ = function(id){
     return document.getElementById(id);
-}
+};
 
-if(token!=null && username!=null && role!=null) {
-    if(role=="buyer") {
-        $('headLeft').innerHTML = "欢迎 ["+username+"]";
-        $('headRight').innerHTML = "<li><a href='/'>首页</a></li>"
-                                   + "<li><a href='/'>购物车</a></li>"
-                                   + "<li><a href='/'>财务</a></li>"
-                                   + "<li><a href='/'>退出</a></li>";
+(function () {
+    var goods = sessionStorage.getItem("goods");
+    if (goods == null) {
+        getGoods(initPage);
     } else {
-        $('headLeft').innerHTML = "欢迎 ["+username+"]";
-        $('headRight').innerHTML = "<li><a href='/'>首页</a></li>"
-                                   + "<li><a href='/'>发布</a></li>"
-                                   + "<li><a href='/'>退出</a></li>";
+        initPage(JSON.parse(goods));
     }
-} else{
-    location.href="/login";
+    function initPage(goods){
+        if(token!=null && username!=null && role!=null) {
+            if(role=="buyer") {
+               initBuyerPage(goods);
+            } else {
+               initSellerPage(goods);
+            }
+        } else{
+            initContent(goods);
+        }
+    }
+})();
+
+function initContent(goods) {
+    $("g-img").innerHTML = "<img src='"+goods[goodsId].image+"' alt='' >";
+    $("g-title").innerHTML = goods[goodsId].title;
+    $("g-abstract").innerHTML = goods[goodsId].goods_abstract;
+    $("g-price").innerHTML = "<span class='v-unit'>¥</span><span class='v-value'>"+goods[goodsId].price+"</span>";
+    $("g-text").innerHTML = goods[goodsId].text
 }
 
-function initContent(){
-     ajax({
-        url:'/api/goods?id='+goodsId,
-        type:"GET",
-        success:function(result){
-            $("g-content").in
+function initBuyerPage(goods) {
+    initContent(goods);
+    var records = sessionStorage.getItem("records");
+    if(records==null) {
+        getRecords(handle);
+    } else {
+        handle(JSON.parse(records));
+    }
+    function handle(records) {
+        var keyPrice = {}
+        records.forEach(item => keyPrice[item.goods_id.toString()]=item.buy_price)
+        if (keyPrice.hasOwnProperty(goodsId)) {
+            $("g-bnt").innerHTML = "<span class='u-btn u-btn-primary z-dis'>已购买</span>"
+                                   +"<span class='buyprice'>当时购买价格：¥"+keyPrice[goodsId]+"</span>";
+
+        } else {
+            $("g-bnt").innerHTML = "<button class='u-btn u-btn-primary' id='add'>加入购物车</button>";
+            var loading = new Loading();
+            var layer = new Layer();
+            $('add').onclick = function(e){
+                var num = $('allNum').innerHTML;
+                var productDetail = { 'id': goodsId,
+                                       'price':goods[goodsId].price,
+                                       'title':goods[goodsId].title,
+                                       'num': parseInt(num)
+                                     };
+                var name = 'products';
+                products = util.getCookie(name) || [];
+                var exit = false;
+                for(i=0; i<products.length; i++) {
+                    if(products[i].id == goodsId) {
+                        products[i].num = products[i].num + productDetail.num;
+                        util.setCookie(name, products);
+                        exit = true;
+                    }
+                }
+                if (!exit) {
+                    products.push(productDetail);
+                    util.setCookie(name, products);
+                }
+                layer.reset({
+                    content:'确认加入购物车吗？',
+                    onconfirm:function(){
+                        layer.hide();
+                        loading.show();
+                        loading.result('添加购物车成功');
+                    }.bind(this)
+                }).show();
+                return;
+            };
         }
-     });
+    }
 }
-initContent();
+
+
+function initSellerPage(goods) {
+    initContent(goods);
+    $("g-bnt").innerHTML = "<button class='u-btn u-btn-primary' id='edit'>编辑</button>";
+    $("edit").onclick = function (e) {
+        location.href = "/edit?id="+goodsId;
+    }
+}
 
 $('plusNum').onclick = function(e){
     e = window.event || e;
@@ -53,44 +116,6 @@ $('addNum').onclick = function(e){
 	var num = $('allNum').textContent;
 	num ++;
 	$('allNum').innerHTML = num;
-};
-	
-var loading = new Loading();
-var layer = new Layer();
-
-	
-$('add').onclick = function(e){
-	var ele = e.target;
-	var id = ele && ele.dataset.id;
-	var title = ele && ele.dataset.title;
-	var price = ele && ele.dataset.price;
-	var num = $('allNum').innerHTML;
-	var productDetail = {'id':id,'price':price,'title':title,'num':num};
-	var name = 'products';
-	var productList1 = new Array;
-	var productList = util.getCookie(name);
-	if(productList == "" || productList == null){
-		productList1.push(productDetail);
-		util.setCookie(name,productList1);
-	}else if(util.findOne(productList,id)){
-		util.modifyTwo(productList,id,num);
-		util.setCookie(name,productList);
-	}else{
-		productList.push(productDetail);
-		util.setCookie(name,productList);
-	}
-	console.log(document.cookie);
-//		util.deleteCookie(name);
-	e == window.event || e;
-	layer.reset({
-	    content:'确认加入购物车吗？',
-		onconfirm:function(){
-		layer.hide();
-		loading.show();
-		loading.result('添加购物车成功');
-		}.bind(this)
-	}).show();
-	return;
 };
 
 

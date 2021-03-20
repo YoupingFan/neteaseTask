@@ -201,7 +201,7 @@ select.u-ipt{width:auto;padding:0;line-height:1;}
 .n-show .cnt .num{margin:0 0 10px;}
 .lessNum , .moreNum{font-size:18px;font-weight:bold;margin-left:10px;}
 .totalNum{font-size:16px;margin-left:10px;}
-.n-show .cnt .oprt{margin:10px 0 0;}
+.n-show .cnt .oprt{margin:10px;}
 .n-show .cnt .u-btn{min-width:8em;float:left;margin-right:10px;}
 .n-show .cnt .buyprice{float:left;line-height: 32px;color:#999;}
 

@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface RecordDao {
     public List<BuyRecord> selectAll();
+
+    public void insertAll(List<BuyRecord> buyRecords);
 }

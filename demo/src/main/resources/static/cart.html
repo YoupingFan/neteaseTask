@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<title>主页</title>
-<link rel="stylesheet" href="/css/style.css"/>
-</head>
-<body>
+    <meta charset="utf-8"/>
+    <title>购物车</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head><body>
 <div class="n-support">请使用Chrome、Safari等webkit内核的浏览器！</div>
 <div class="n-head">
     <div class="g-doc f-cb">
@@ -16,24 +15,25 @@
         </ul>
     </div>
 </div>
-<div class="g-doc">
+<div class="g-doc" id="settleAccount">
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
-        <div class="tab">
-            <ul id="content">
-                <li class="z-sel" ><a href="/">所有内容</a></li>
-            </ul>
-        </div>
+        <h2>已添加到购物车的内容</h2>
     </div>
-    <div class="n-plist">
-        <ul class="f-cb" id="plist">
-        </ul>
-    </div>
+    <table class="m-table m-table-row n-table g-b3">
+        <thead>
+        <tr><th>内容名称</th><th>数量</th><th>价格</th></tr>
+        </thead>
+        <tbody id="newTable">
+        </tbody>
+    </table>
+    <div id="act-btn"><button class="u-btn u-btn-primary" id="back">退出</button>
+        <button class="u-btn u-btn-primary" id="Account">购买</button></div>
 </div>
 <div class="n-foot">
     <p>版权所有：网易云课堂<a href="http://mooc.study.163.com/smartSpec/detail/85002.htm">Java开发工程师(Web方向)</a>微专业团队</p>
 </div>
 <script type="text/javascript" src="/js/global.js"></script>
 <script type="text/javascript" src="/js/head.js"></script>
-<script type="text/javascript" src="/js/pageIndex.js"></script>
+<script type="text/javascript" src="/js/pageCart.js"></script>
 </body>
 </html>

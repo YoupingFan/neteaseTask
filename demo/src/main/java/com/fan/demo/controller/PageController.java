@@ -24,4 +24,28 @@ public class PageController {
 	public ModelAndView show(@RequestParam(defaultValue = "-1") int id) {
 		return new ModelAndView("/show.html");
 	}
+	@GetMapping("/cart")
+	public ModelAndView cart() {
+		return new ModelAndView("/cart.html");
+	}
+
+	@GetMapping("/account")
+	public ModelAndView account() {
+		return new ModelAndView("/account.html");
+	}
+
+	@GetMapping("/public")
+	public ModelAndView _public() {
+		return new ModelAndView("/public.html");
+	}
+
+	@GetMapping("/edit")
+	public ModelAndView edit() {
+		return new ModelAndView("/edit.html");
+	}
+
+	@GetMapping("/success")
+	public ModelAndView success() {
+		return new ModelAndView("/success.html");
+	}
 }

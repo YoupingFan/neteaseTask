@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>show</title>
+    <title>展示</title>
     <link rel="stylesheet" href="/css/style.css"/>
-</head><body>
+</head>
+<body>
 <div class="n-support">请使用Chrome、Safari等webkit内核的浏览器！</div><div class="n-head">
     <div class="g-doc f-cb">
         <div id="headLeft" class="user">
@@ -17,28 +17,29 @@
 </div>
 <div class="g-doc">
     <div class="n-show f-cb">
-        <div class="img"><img src="fff" alt="" ></div>
+        <div id="g-img" class="img" ></div>
         <div class="cnt">
-            <h2>百度1</h2>
-            <p class="summary">百度</p>
-            <div class="price">
-                <span class="v-unit">¥</span><span class="v-value">113.57</span>
+            <h2 id="g-title"></h2>
+            <p id="g-abstract" class="summary">百度</p>
+            <div id="g-price" class="price">
+                <span class="v-unit">¥</span><span class="v-value">0</span>
             </div>
-            <div class="num">购买数量：<span id="plusNum" class="lessNum"><a>-</a></span><span class="totalNum" id="allNum"></span><span id="addNum" class="moreNum"><a>+</a></span></div>
-            <div class="oprt f-cb">
+            <div class="num">购买数量：<span id="plusNum" class="lessNum"><a>-</a></span><span class="totalNum" id="allNum">1</span><span id="addNum" class="moreNum"><a>+</a></span></div>
+            <div id="g-bnt" class="oprt f-cb">
             </div>
         </div>
     </div>
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
         <h2>详细信息</h2>
     </div>
-    <div class="n-detail">
-        百度
+    <div id="g-text" class="n-detail">
     </div>
 </div>
 <div class="n-foot">
     <p>版权所有：网易云课堂<a href="http://mooc.study.163.com/smartSpec/detail/85002.htm">Java开发工程师(Web方向)</a>微专业团队</p>
-</div><script type="text/javascript" src="/js/global.js"></script>
+</div>
+<script type="text/javascript" src="/js/global.js"></script>
+<script type="text/javascript" src="/js/head.js"></script>
 <script type="text/javascript" src="/js/pageShow.js"></script>
 </body>
 </html>

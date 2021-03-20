@@ -9,4 +9,32 @@
     <select id="selectById" resultType="Goods">
         select * from goods where id = #{id}
     </select>
+    <insert id="insert" parameterType="Goods" useGeneratedKeys="true" keyProperty="id">
+        insert into goods (title, image, goods_abstract, text, price, sell_num)
+        values (
+            #{title},
+            #{image},
+            #{goods_abstract},
+            #{text},
+            #{price},
+            #{sell_num}
+        )
+    </insert>
+    <delete id="delete">
+        delete from goods where id = #{id}
+    </delete>
+    <update id="updateInfo">
+        update goods set
+        goods_abstract = #{goods_abstract},
+        title = #{title},
+        image = #{image},
+        text = #{text},
+        price = #{price}
+        where id = #{id}
+    </update>
+    <update id="updateNum">
+        update goods set
+        sell_num = #{sell_num}
+        where id = #{id}
+    </update>
 </mapper>

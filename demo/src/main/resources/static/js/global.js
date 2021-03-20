@@ -198,3 +198,79 @@
 	w.Layer = Layer;
 	w.Loading = Loading;
 })(window,document);
+
+function getGoods(callback) {
+    ajax({
+        url:'/api/goods',
+        type:"GET",
+        success:function(result){
+        var goods = {};
+            result.forEach(item => goods[item.id.toString()] = item);
+            sessionStorage.setItem("goods", JSON.stringify(goods));
+            callback(goods);
+        }
+    });
+}
+function getRecords(callback) {
+    var token = sessionStorage.getItem("token");
+    if(token != null) {
+        ajax({
+            url:'/api/records',
+            type:'GET',
+            headers: {
+                "Authentication" : token
+            },
+            success:function(records) {
+                sessionStorage.setItem("records", JSON.stringify(records));
+                callback(records);
+            },
+            error:function(data) {
+                if(data.code==401) {
+                   location.href="/login";
+                }
+            }
+        });
+    }
+}
+function publicSubmit(callback, form_data) {
+    var token = sessionStorage.getItem("token");
+    if(token != null) {
+        ajax({
+            url:'/api/publicSubmit',
+            type:'POST',
+            data : form_data,
+            headers: {
+                "Authentication" : token
+            },
+            success:function(result) {
+                callback();
+            },
+            error:function(data) {
+                if(data.code==401) {
+                   location.href="/login";
+                }
+            }
+        });
+    }
+}
+function editSubmit(callback, form_data) {
+    var token = sessionStorage.getItem("token");
+    if(token != null) {
+        ajax({
+            url:'/api/edit',
+            type:'POST',
+            data : form_data,
+            headers: {
+                "Authentication" : token
+            },
+            success:function(result) {
+                callback();
+            },
+            error:function(data) {
+                if(data.code==401) {
+                   location.href="/login";
+                }
+            }
+        });
+    }
+}

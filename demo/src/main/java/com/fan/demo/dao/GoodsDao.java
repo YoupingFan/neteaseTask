@@ -9,4 +9,8 @@ import java.util.List;
 public interface GoodsDao {
     public List<Goods> selectAll();
     public Goods selectById(int id);
+    public void insert(Goods goods);
+    public void delete(int id);
+    public void updateInfo(Goods goods);
+    public void updateNum(int id, int sell_num);
 }
